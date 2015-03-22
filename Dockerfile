@@ -1,14 +1,16 @@
 FROM bartt/ubuntu-base
-MAINTAINER Bart Teeuwisse <bart@thecodemill.biz>
+MAINTAINER Stefano Masini <stefano@stefanomasini.com>
 
 RUN apt-get -y install python3-yaml
 
 RUN mkdir /pocketmine
-RUN cd /pocketmine && curl -sL http://get.pocketmine.net/ | bash -s - -r -v development
+
+ADD ./scripts/start /start
+RUN chmod +x /start
 
 VOLUME /pocketmine
 WORKDIR /pocketmine
 
 EXPOSE 19132
 
-CMD ["./start.sh", "--no-wizard", "--enable-rcon=on"]
+CMD ["/start"]

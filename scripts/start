@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /pocketmine
+
+if [ ! -f /pocketmine/pocketmine.sh ]
+then
+    curl "http://get.pocketmine.net/" -o pocketmine.sh
+    cat pocketmine.sh | bash -s - -r -v development
+fi
+
+./start.sh --no-wizard --enable-rcon=on
